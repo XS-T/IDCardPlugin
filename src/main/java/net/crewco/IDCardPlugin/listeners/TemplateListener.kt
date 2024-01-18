@@ -1,4 +1,4 @@
-package net.crewco.RawGensPlugin.listeners
+package net.crewco.IDCardPlugin.listeners
 
 import com.google.inject.Inject
 import net.kyori.adventure.text.Component

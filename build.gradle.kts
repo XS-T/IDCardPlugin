@@ -134,7 +134,7 @@ tasks {
 
 	compileKotlin {
 		kotlinOptions {
-			jvmTarget = "17"
+			jvmTarget = "18"
 		}
 	}
 
@@ -158,6 +158,5 @@ bukkit {
 	version = project_version
 	authors = listOf("CrewCo Team", *project_owners.split(",").toTypedArray())
 	main = "$project_package.$project_plugin_class"
-	apiVersion = "1.19"
-	depend = listOf("LuckPerms")
+	apiVersion = "1.20"
 }

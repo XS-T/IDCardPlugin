@@ -1,10 +1,10 @@
-package net.crewco.RawGensPlugin
+package net.crewco.IDCardPlugin
 
 import net.crewco.common.CrewCoPlugin
 
-class CrewCoTemPlate : CrewCoPlugin() {
+class IDCardPlugin : CrewCoPlugin() {
 	companion object{
-		lateinit var plugin:CrewCoTemPlate
+		lateinit var plugin:IDCardPlugin
 			private set
 	}
 	override suspend fun onEnableAsync() {
