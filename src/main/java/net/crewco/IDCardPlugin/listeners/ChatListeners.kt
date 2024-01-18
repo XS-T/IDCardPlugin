@@ -45,7 +45,6 @@ class ChatListeners : Listener {
 		val meta = idPaper.itemMeta
 
 		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&a&lID-Card"))
-		meta.addEnchant(Enchantment.DURABILITY,5,true)
 
 		// Add player information to the lore of the paper
 		val lore: MutableList<String> = ArrayList()
@@ -54,6 +53,7 @@ class ChatListeners : Listener {
 		}
 
 		meta.lore = lore
+		meta.addEnchant(Enchantment.DURABILITY,5,true)
 		meta.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
 		idPaper.itemMeta = meta
 
