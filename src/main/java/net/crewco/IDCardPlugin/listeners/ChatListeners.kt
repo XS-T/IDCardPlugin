@@ -57,7 +57,6 @@ class ChatListeners : Listener {
 
 		meta.lore = lore
 		meta.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
-		idPaper.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
 		idPaper.itemMeta = meta
 
 		// Give the paper to the player
