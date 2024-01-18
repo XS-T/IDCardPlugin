@@ -19,7 +19,7 @@ class ChatListeners : Listener {
 		val player = event.player
 		val prompts = playerData[player]
 
-		if (prompts != null && prompts.isNotEmpty()) {
+		if (!prompts.isNullOrEmpty()) {
 			event.isCancelled = true // Cancel the normal chat behavior
 
 			val prompt = prompts[0]
