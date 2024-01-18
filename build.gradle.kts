@@ -57,10 +57,10 @@ repositories {
 		url = uri("https://repo.codemc.org/repository/maven-public/")
 	}
 
-	maven {
-		name = "totallyavirus"
-		url = uri("https://repo.totallyavir.us/maven-public")
-	}
+	//maven {
+	//	name = "totallyavirus"
+	//	url = uri("https://repo.totallyavir.us/maven-public")
+	//}
 
 	maven {
 		name = "sponge"

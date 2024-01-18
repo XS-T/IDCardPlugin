@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CrewCoTemplate.test.iml" filepath="$PROJECT_DIR$/.idea/modules/CrewCoTemplate.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/IDCardPlugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/IDCardPlugin.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/IDCardPlugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/IDCardPlugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.crewco.IDCardPlugin.IDCardPlugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.crewco.IDCardPlugin.IDCardPlugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.crewco.IDCardPlugin.IDCardPlugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/net.crewco.IDCardPlugin.IDCardPlugin.test.iml" />
     </modules>
   </component>
 </project>

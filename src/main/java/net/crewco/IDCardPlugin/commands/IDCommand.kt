@@ -5,12 +5,16 @@ import cloud.commandframework.annotations.CommandMethod
 import cloud.commandframework.annotations.CommandPermission
 import com.google.inject.Inject
 import net.crewco.IDCardPlugin.IDCardPlugin
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.playerData
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.promptManager
 import org.bukkit.entity.Player
 
-class TemplateCommand @Inject constructor(private val plugin: IDCardPlugin) {
-	@CommandMethod("templatecommand")
+class IDCommand @Inject constructor(private val plugin: IDCardPlugin) {
+	@CommandMethod("id")
 	@CommandDescription("Template Command")
-	@CommandPermission("templateplugin.command.templatecommand")
-	suspend fun template(player: Player) {
+	@CommandPermission("id.command.use")
+	fun onUses(player:Player){
+		promptManager.promptUser(player)
+
 	}
 }
