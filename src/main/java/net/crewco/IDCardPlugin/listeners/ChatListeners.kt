@@ -40,7 +40,6 @@ class ChatListeners  @Inject constructor(private val plugin: IDCardPlugin) : Lis
 			} else {
 				// All information collected, generate ID
 				generateAndGiveID(player)
-				player.sendMessage("Response: $response")
 
 				// Removes the player from the promptCheck
 				promptCheck.remove(player)
