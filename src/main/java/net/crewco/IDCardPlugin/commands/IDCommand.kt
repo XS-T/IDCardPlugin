@@ -12,8 +12,7 @@ import org.bukkit.entity.Player
 
 class IDCommand @Inject constructor(private val plugin: IDCardPlugin) {
 	@CommandMethod("id")
-	@CommandDescription("Template Command")
-	@CommandPermission("id.command.use")
+	@CommandDescription("ID Card Command")
 	fun onUses(player:Player){
 		promptManager.promptUser(player)
 		// Adds the player to promptCheck map

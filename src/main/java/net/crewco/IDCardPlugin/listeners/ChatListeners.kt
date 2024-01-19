@@ -1,5 +1,6 @@
 package net.crewco.IDCardPlugin.listeners
 
+import com.google.inject.Inject
 import net.crewco.IDCardPlugin.IDCardPlugin
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.SynidMsg
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.playerData
@@ -16,7 +17,7 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 
 
-class ChatListeners : Listener {
+class ChatListeners  @Inject constructor(private val plugin: IDCardPlugin) : Listener {
 	@EventHandler
 	fun onPlayerChat(event: AsyncPlayerChatEvent) {
 		val player = event.player
@@ -27,8 +28,10 @@ class ChatListeners : Listener {
 
 			val inputList = playerData.computeIfAbsent(player) { mutableListOf() }
 
-			// Save the player's response
-			inputList.add(event.message)
+			// Save the player's response (limit to a reasonable length)
+			val maxResponseLength = plugin.config.getInt("max-length") // Adjust the maximum allowed length as needed
+			val response = event.message.substring(0, minOf(event.message.length, maxResponseLength))
+			inputList.add(response)
 
 			// Move to the next prompt or generate the ID
 			prompts.removeAt(0)
@@ -37,6 +40,7 @@ class ChatListeners : Listener {
 			} else {
 				// All information collected, generate ID
 				generateAndGiveID(player)
+				player.sendMessage("Response: $response")
 
 				// Removes the player from the promptCheck
 				promptCheck.remove(player)
@@ -46,20 +50,21 @@ class ChatListeners : Listener {
 			}
 		}
 	}
+
 	private fun generateAndGiveID(player: Player) {
 		val idPaper = ItemStack(Material.PAPER)
 		val meta = idPaper.itemMeta
 
-		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&a&lID-Card"))
+		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lID-Card"))
 
 		// Add player information to the lore of the paper
 		val lore: MutableList<String> = ArrayList()
-		playerData[player]?.forEach { response ->
-			lore.add("${ChatColor.DARK_PURPLE}${promptManager.promptadd()}: ${ChatColor.DARK_GRAY}$response")
+		playerData[player]?.forEachIndexed { index, response ->
+			lore.add("${ChatColor.DARK_PURPLE}${promptManager.getPrompt()}: ${ChatColor.DARK_GRAY}$response")
 		}
 
 		meta.lore = lore
-		meta.addEnchant(Enchantment.DURABILITY,5,true)
+		meta.addEnchant(Enchantment.DURABILITY, 5, true)
 		meta.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
 		idPaper.itemMeta = meta
 

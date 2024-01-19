@@ -1,6 +1,9 @@
 package net.crewco.IDCardPlugin.Utils
 
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.SynidMsg
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.cage
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.cbio
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.cname
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.playerData
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.promptCheck
 import org.bukkit.entity.Player
@@ -13,7 +16,7 @@ class PromptManager {
 		player.sendMessage("$SynidMsg Please fill out the following information:")
 
 		// Start collecting information
-		playerData[player] = mutableListOf("Name", "Age", "Bio")
+		playerData[player] = mutableListOf(cname, cage, cbio)
 		askForInput(player)
 	}
 
@@ -28,7 +31,7 @@ class PromptManager {
 		return promptCount
 	}
 
-	fun promptadd(): String{
+	fun getPrompt(): String{
 		val list = mutableListOf("Name", "Age", "Bio")
 		return list[list_count++]
 
