@@ -1,14 +1,16 @@
 package net.crewco.IDCardPlugin.Utils
 
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.SynidMsg
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.playerData
-import org.bukkit.ChatColor
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.promptCheck
 import org.bukkit.entity.Player
 
 class PromptManager {
-	var promptCount = 3
-	var listcount = 0
+	private var promptCount = 3
+	private var list_count = 0
+	//var isDone = false
 	 fun promptUser(player: Player) {
-		player.sendMessage("Please fill out the following information:")
+		player.sendMessage("$SynidMsg Please fill out the following information:")
 
 		// Start collecting information
 		playerData[player] = mutableListOf("Name", "Age", "Bio")
@@ -28,8 +30,12 @@ class PromptManager {
 
 	fun promptadd(): String{
 		val list = mutableListOf("Name", "Age", "Bio")
-		return list[listcount++]
+		return list[list_count++]
 
+	}
+
+	fun isDone(player: Player):Boolean{
+		return promptCheck.containsKey(player)
 	}
 
 }

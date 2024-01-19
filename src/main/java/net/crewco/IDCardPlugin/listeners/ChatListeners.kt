@@ -1,6 +1,9 @@
 package net.crewco.IDCardPlugin.listeners
 
+import net.crewco.IDCardPlugin.IDCardPlugin
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.SynidMsg
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.playerData
+import net.crewco.IDCardPlugin.IDCardPlugin.Companion.promptCheck
 import net.crewco.IDCardPlugin.IDCardPlugin.Companion.promptManager
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -22,7 +25,6 @@ class ChatListeners : Listener {
 		if (!prompts.isNullOrEmpty()) {
 			event.isCancelled = true // Cancel the normal chat behavior
 
-			val prompt = prompts[0]
 			val inputList = playerData.computeIfAbsent(player) { mutableListOf() }
 
 			// Save the player's response
@@ -30,11 +32,15 @@ class ChatListeners : Listener {
 
 			// Move to the next prompt or generate the ID
 			prompts.removeAt(0)
-			if (prompts.isNotEmpty() && promptManager.countPromptsSent() != 0) {
+			if (prompts.isNotEmpty() && promptManager.countPromptsSent() != 0 && promptManager.isDone(player)) {
 				promptManager.askForInput(player)
 			} else {
 				// All information collected, generate ID
 				generateAndGiveID(player)
+
+				// Removes the player from the promptCheck
+				promptCheck.remove(player)
+
 				// Clean up the input map
 				playerData.remove(player)
 			}
@@ -49,7 +55,7 @@ class ChatListeners : Listener {
 		// Add player information to the lore of the paper
 		val lore: MutableList<String> = ArrayList()
 		playerData[player]?.forEach { response ->
-			lore.add("${ChatColor.translateAlternateColorCodes('&',"&7&l${promptManager.promptadd()}")}:$response")
+			lore.add("${ChatColor.DARK_PURPLE}${promptManager.promptadd()}: ${ChatColor.DARK_GRAY}$response")
 		}
 
 		meta.lore = lore
@@ -59,6 +65,6 @@ class ChatListeners : Listener {
 
 		// Give the paper to the player
 		player.inventory.addItem(idPaper)
-		player.sendMessage("Your ID paper has been created and added to your inventory.")
+		player.sendMessage("$SynidMsg Your ID paper has been created and added to your inventory.")
 	}
 }
